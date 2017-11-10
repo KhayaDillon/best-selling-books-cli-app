@@ -17,43 +17,53 @@ class BestSellingBooks::CLI
     if site.downcase == "amazon" || site == "amazon's"
       list_best_sellers
     else
-      puts "Please type the name of the best seller's list you would like to view."
+      puts "Please type the name of the best sellers list you would like to view."
       choose_best_sellers_list
     end
   end
 
   def display_options
-    puts "Please choose a listing number for more information. Or type exit."
+    puts "Please type a listing number for more information, or type 'Best Sellers' to go back and pick a different top 10 list, or type 'Exit' to leave."
     input = gets.strip
-    until input == "exit"
-      if input == "1" || input == "2"
-        puts "What would you like to know?"
-        puts "A. Genre"
-        puts "B. Plot Summary"
-        puts "C. Author Bio"
-        puts "D. Prices & Formats"
-        puts "E. Link"
+    if input.downcase == "exit"
+      exit
+    elsif input == "1" || input == "2"
+      choose_info
+    elsif input.downcase == "best sellers"
+      call
+    else
+      puts "Invalid input."
+      display_options
+    end
+  end
+
+  def choose_info
+    puts "What would you like to know about this listing?"
+    puts "A. Genre"
+    puts "B. Plot Summary"
+    puts "C. Author Bio"
+    puts "D. Prices & Formats"
+    puts "E. Link"
+
+    loop do
+      input = gets.strip
+      case input.downcase
+      when "a"
+        puts "Genre"
+      when "b"
+        puts "Plot Summary"
+      when "c"
+        puts "Author Bio"
+      when "d"
+        puts "Price n format"
+      when "e"
+        puts "Link"
+      when "best sellers"
+        call
+      when "exit"
+        exit
       else
         puts "Invalid input."
-        display_options
-      end
-
-      until input == "exit"
-        input = gets.strip
-        case input
-        when "A", "a"
-          puts "Genre"
-        when "B", "b"
-          puts "Plot Summary"
-        when "C", "c"
-          puts "Author Bio"
-        when "D", "d"
-          puts "Price n format"
-        when "E", "e"
-          puts "Link"
-        when "best sellers"
-          call
-        end
       end
     end
   end
