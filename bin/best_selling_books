@@ -2,4 +2,5 @@
 
 require './lib/best_selling_books'
 
+puts "Welcome to Top 10 Best Selling Books"
 BestSellingBooks::CLI.new.call
