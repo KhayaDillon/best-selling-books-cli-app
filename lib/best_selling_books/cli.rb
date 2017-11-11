@@ -36,23 +36,23 @@ class BestSellingBooks::CLI
 
   def choose_info
     puts "What would you like to know about this listing?"
-    puts "A. Genre"
-    puts "B. Plot Summary"
-    puts "C. Author Bio"
-    puts "D. Prices & Formats"
+    puts "A. Author"
+    puts "B. Price"
+    puts "C. Available Format"
+    puts "D. Site Rating"
     puts "E. Link"
 
     loop do
       input = gets.strip
       case input.downcase
       when "a"
-        puts "Genre"
+        puts "Author"
       when "b"
-        puts "Plot Summary"
+        puts "Price"
       when "c"
-        puts "Author Bio"
+        puts "Available Format"
       when "d"
-        puts "Price n format"
+        puts "Site Rating"
       when "e"
         puts "Link"
       when "best sellers"
