@@ -2,6 +2,8 @@
 class BestSellingBooks::BarnesAndNobleScraper
   extend BestSellingBooks::Collectable
 
+  @@all_books = []
+
   def self.get_book_list
     #doc = Nokogiri::HTML(open("https://www.barnesandnoble.com/b/books/_/N-1fZ29Z8q8"))
   end

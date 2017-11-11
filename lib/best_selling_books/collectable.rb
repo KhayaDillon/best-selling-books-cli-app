@@ -16,8 +16,8 @@ module BestSellingBooks::Collectable
   end
 
   def list_best_sellers
-    binding.pry
-    self.all_books.each {|instance| puts "#{instance.title}"}
+    self.create_books
+    self.all_books.each_with_index {|instance, n| puts "#{n += 1}. #{instance.title}"}
 
     #scrape_book_list.each_with_index do |hash, n|
     #  puts "#{n += 1}. #{hash[:Title]}"
