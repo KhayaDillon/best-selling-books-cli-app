@@ -2,7 +2,8 @@
 module BestSellingBooks::Collectable
 
   def list_best_sellers
-    puts "1. Milk and Honey by Rupi Kaur"
-    puts "2. Hillbilly Elegy: A Memoir of a Family and Culture in Crisis by J. D. Vance"
+    scrape_book_list.each_with_index do |title, n|
+      puts "#{n += 1}. #{title[0]} by #{title[1]}"
+    end
   end
 end
