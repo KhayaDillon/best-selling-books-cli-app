@@ -6,16 +6,11 @@ class BestSellingBooks::CLI
     display_options
   end
 
-  def list_best_sellers
-    puts "1. Milk and Honey by Rupi Kaur"
-    puts "2. Hillbilly Elegy: A Memoir of a Family and Culture in Crisis by J. D. Vance"
-  end
-
   def choose_best_sellers_list
     puts "Would you like to see Barnes & Nobles' or Amazon's best sellers of 2017?"
     site = gets.strip
     if site.downcase == "amazon" || site == "amazon's"
-      list_best_sellers
+      BestSellingBooks::AmazonScraper.list_best_sellers
     else
       puts "Please type the name of the best sellers list you would like to view."
       choose_best_sellers_list

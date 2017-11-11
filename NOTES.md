@@ -15,4 +15,9 @@ Asks user what they would like to know
   Author Bio
   Prices & Formats
   Link
-  
+
+Class Responsibilities
+  CLI - displays best sellers and related information
+  Site Scraper - scraps book lists and related information, has many books
+  Collect Module - has self.list_best_sellers
+  Books - belongs to a site, has characteristics (takes info from site scraper to assign characteristics)
