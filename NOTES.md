@@ -21,3 +21,5 @@ Class Responsibilities
   Site Scraper - scraps book lists and related information, has many books
   Collect Module - has self.list_best_sellers
   Books - belongs to a site, has characteristics (takes info from site scraper to assign characteristics)
+
+-Don't have 2017 hard coded

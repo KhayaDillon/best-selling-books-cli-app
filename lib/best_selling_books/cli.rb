@@ -1,5 +1,6 @@
 
 class BestSellingBooks::CLI
+  attr_accessor :site
 
   def call
     choose_best_sellers_list
@@ -10,9 +11,13 @@ class BestSellingBooks::CLI
     puts "Would you like to see Barnes & Nobles' or Amazon's best sellers of 2017?"
     site = gets.strip
     if site.downcase == "amazon" || site.downcase == "amazon's"
-      BestSellingBooks::AmazonScraper.list_best_sellers
+      @site = BestSellingBooks::AmazonScraper
+      @site.create_books
+      @site.list_best_sellers
     elsif site.downcase == "barnes & noble" || site.downcase == "barnes & noble's" || site.downcase == "b&n"
-      BestSellingBooks::BarnesAndNobleScraper.list_best_sellers
+      @site = BestSellingBooks::BarnesAndNobleScraper
+      @site.create_books
+      @site.list_best_sellers
     else
       puts "Please type the name of the best sellers list you would like to view."
       choose_best_sellers_list
@@ -22,11 +27,15 @@ class BestSellingBooks::CLI
   def display_options
     puts "Please type a listing number for more information, or type 'Best Sellers' to go back and pick a different top 10 list, or type 'Exit' to leave."
     input = gets.strip
-    if input.downcase == "exit"
+    case input.downcase
+    when "exit"
       exit
-    elsif input == "1" || input == "2"
+    when "1"
+
       choose_info
-    elsif input.downcase == "best sellers"
+    when "2"
+      choose_info
+    when "best sellers"
       call
     else
       puts "Invalid input."

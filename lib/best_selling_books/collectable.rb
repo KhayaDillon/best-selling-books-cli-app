@@ -11,16 +11,12 @@ module BestSellingBooks::Collectable
       instance.format = hash[:Format]
       instance.rating = hash[:Rating]
       instance.link = hash[:Link]
+      instance.rank = hash[:Rank]
       self.all_books << instance
     end
   end
 
   def list_best_sellers
-    self.create_books
-    self.all_books.each_with_index {|instance, n| puts "#{n += 1}. #{instance.title}"}
-
-    #scrape_book_list.each_with_index do |hash, n|
-    #  puts "#{n += 1}. #{hash[:Title]}"
-    #end
+    self.all_books.each {|instance| puts "#{instance.rank}. #{instance.title}"}
   end
 end
