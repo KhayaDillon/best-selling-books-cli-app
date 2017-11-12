@@ -1,6 +1,7 @@
+require 'pry'
 
 class BestSellingBooks::CLI
-  attr_accessor :site
+  attr_accessor :site, :book
 
   def call
     choose_best_sellers_list
@@ -31,7 +32,7 @@ class BestSellingBooks::CLI
     when "exit"
       exit
     when "1"
-
+      @book = @site.all_books.detect {|instance| instance.rank == "1" }
       choose_info
     when "2"
       choose_info
