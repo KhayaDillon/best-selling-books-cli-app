@@ -35,6 +35,7 @@ class BestSellingBooks::CLI
       @book = @site.all_books.detect {|instance| instance.rank == "1" }
       choose_info
     when "2"
+      @book = @site.all_books.detect {|instance| instance.rank == "2" }
       choose_info
     when "best sellers"
       call
@@ -56,15 +57,15 @@ class BestSellingBooks::CLI
       input = gets.strip
       case input.downcase
       when "a"
-        puts "Author"
+        puts @book.author
       when "b"
-        puts "Price"
+        puts @book.price
       when "c"
-        puts "Available Format"
+        puts @book.format
       when "d"
-        puts "Site Rating"
+        puts @book.rating
       when "e"
-        puts "Link"
+        puts @book.link
       when "best sellers"
         call
       when "exit"

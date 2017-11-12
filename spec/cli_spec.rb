@@ -14,9 +14,9 @@ describe BestSellingBooks::CLI do
 
     describe "#book" do
       it "saves the instance of a book" do
-        #cli_instance = BestSellingBooks::CLI.new
-        #cli_instance.site = BestSellingBooks::AmazonScraper
-        #cli_instance.create_books
+        cli_instance = BestSellingBooks::CLI.new
+        cli_instance.site = BestSellingBooks::AmazonScraper
+        cli_instance.site.create_books
 
         expect(cli_instance.book).to be_instance_of(BestSellingBooks::Books)
       end
