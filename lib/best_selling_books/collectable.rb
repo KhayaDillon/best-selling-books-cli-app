@@ -7,6 +7,7 @@ module BestSellingBooks::Collectable
       instance = BestSellingBooks::Books.new
       instance.title = hash[:Title]
       instance.author = hash[:Author]
+      instance.author_bio = hash[:Author_Bio]
       instance.price = hash[:Price]
       instance.format = hash[:Format]
       instance.rating = hash[:Rating]
@@ -17,6 +18,6 @@ module BestSellingBooks::Collectable
   end
 
   def list_best_sellers
-    self.all_books.each {|instance| puts "#{instance.rank}. #{instance.title}"}
+    self.all_books.each {|instance| puts "#{instance.rank}. #{instance.title} by #{instance.author}"}
   end
 end

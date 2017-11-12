@@ -1,3 +1,6 @@
+require 'nokogiri'
+require 'open-uri'
+
 require_relative "./best_selling_books/version"
 require_relative "./best_selling_books/cli"
 require_relative "./best_selling_books/collectable"

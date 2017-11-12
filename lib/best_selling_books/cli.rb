@@ -1,7 +1,6 @@
-require 'pry'
 
 class BestSellingBooks::CLI
-  attr_accessor :site, :book
+  #attr_accessor :site, :book
 
   def call
     choose_best_sellers_list
@@ -13,11 +12,11 @@ class BestSellingBooks::CLI
     site = gets.strip
     if site.downcase == "amazon" || site.downcase == "amazon's"
       @site = BestSellingBooks::AmazonScraper
-      @site.create_books
+      @site.create_books if @site.all_books == []
       @site.list_best_sellers
     elsif site.downcase == "barnes & noble" || site.downcase == "barnes & noble's" || site.downcase == "b&n"
       @site = BestSellingBooks::BarnesAndNobleScraper
-      @site.create_books
+      @site.create_books if @site.all_books == []
       @site.list_best_sellers
     else
       puts "Please type the name of the best sellers list you would like to view."
@@ -47,7 +46,7 @@ class BestSellingBooks::CLI
 
   def choose_info
     puts "What would you like to know about this listing?"
-    puts "A. Author"
+    puts "A. Author Bio"
     puts "B. Price"
     puts "C. Available Format"
     puts "D. Site Rating"
@@ -57,7 +56,7 @@ class BestSellingBooks::CLI
       input = gets.strip
       case input.downcase
       when "a"
-        puts @book.author
+        puts @book.author_bio
       when "b"
         puts @book.price
       when "c"
