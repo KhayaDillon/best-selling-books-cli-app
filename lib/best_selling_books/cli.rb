@@ -8,7 +8,7 @@ class BestSellingBooks::CLI
   end
 
   def choose_best_sellers_list
-    puts "Would you like to see Barnes & Nobles' or Amazon's best sellers of 2017?"
+    puts "Would you like to see Barnes & Nobles' or Amazon's best sellers of #{Time.now.year}?"
     site = gets.strip
     if site.downcase == "amazon" || site.downcase == "amazon's"
       @site = BestSellingBooks::AmazonScraper
@@ -25,16 +25,16 @@ class BestSellingBooks::CLI
   end
 
   def display_options
-    puts "Please type a listing number for more information, or type 'Best Sellers' to go back and pick a different top 10 list, or type 'Exit' to leave."
+    puts "Please type a listing number for more information, or type 'Best Sellers' to go back and pick a different top 20 list, or type 'Exit' to leave."
     input = gets.strip
     case input.downcase
     when "exit"
       exit
     when "1"
-      @book = @site.all_books.detect {|instance| instance.rank == "1" }
+      @book = @site.all_books.detect {|instance| instance.rank == "1." }
       choose_info
     when "2"
-      @book = @site.all_books.detect {|instance| instance.rank == "2" }
+      @book = @site.all_books.detect {|instance| instance.rank == "2." }
       choose_info
     when "best sellers"
       call

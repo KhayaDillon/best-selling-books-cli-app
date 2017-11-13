@@ -18,6 +18,6 @@ module BestSellingBooks::Collectable
   end
 
   def list_best_sellers
-    self.all_books.each {|instance| puts "#{instance.rank}. #{instance.title} by #{instance.author}"}
+    self.all_books.each {|instance| puts "#{instance.rank} #{instance.title} by #{instance.author}"}
   end
 end
