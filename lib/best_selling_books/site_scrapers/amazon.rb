@@ -9,15 +9,16 @@ class BestSellingBooks::AmazonScraper
   end
 
   def self.scrape_book_list
+    homepage = "https://www.amazon.com"
     get_book_list.css('div.zg_itemImmersion').collect do |book_listing|
       {Rank: book_listing.css('span.zg_rankNumber').text.strip.chop,
       Title: book_listing.css('div.p13n-sc-truncated-hyphen').text.strip,
       Author: book_listing.css('a.a-size-small.a-link-child').text.strip,
-      Author_Bio: book_listing.css('a.a-size-small.a-link-child').attr('href').value.strip,
+      Author_Bio: homepage + book_listing.css('a.a-size-small.a-link-child').attr('href').value.strip,
       Price: book_listing.css('span.p13n-sc-price').text.strip,
       Format: book_listing.css('span.a-size-small.a-color-secondary').text.strip,
       Rating: book_listing.css('i.a-icon-star').text.strip,
-      Link: book_listing.css('a.a-link-normal').attr('href').value.strip}
+      Link: homepage + book_listing.css('a.a-link-normal').attr('href').value.strip}
     end
   end
 

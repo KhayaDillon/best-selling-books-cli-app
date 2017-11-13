@@ -26,17 +26,17 @@ class BestSellingBooks::CLI
 
   def display_options
     puts "Please type a listing number for more information, or type 'Best Sellers' to go back and pick a different top 20 list, or type 'Exit' to leave."
+    choose_option
+  end
+
+  def choose_option
     input = gets.strip
-    case input.downcase
-    when "exit"
+    if input.downcase == "exit"
       exit
-    when "1"
-      @book = @site.all_books.detect {|instance| instance.rank == "1" }
+    elsif input.to_i != 0
+      @book = @site.all_books.detect {|instance| instance.rank == input }
       choose_info
-    when "2"
-      @book = @site.all_books.detect {|instance| instance.rank == "2" }
-      choose_info
-    when "best sellers"
+    elsif input.downcase == "best sellers"
       call
     else
       puts "Invalid input."
