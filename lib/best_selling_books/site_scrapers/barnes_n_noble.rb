@@ -5,28 +5,21 @@ class BestSellingBooks::BarnesAndNobleScraper
   @@all_books = []
 
   def self.get_book_list
-    #doc = Nokogiri::HTML(open("https://www.barnesandnoble.com/b/books/_/N-1fZ29Z8q8"))
+    doc = Nokogiri::HTML(open("https://www.barnesandnoble.com/b/books/_/N-1fZ29Z8q8"))
   end
 
   def self.scrape_book_list
-    [
-      {Rank: "1",
-      Title: "Milk and Honey",
-      Author: "Rupi Kaur",
-      Author_Bio: "url",
-      Price: "$6.70",
-      Format: "Paperback",
-      Rating: "5/5 Stars",
-      Link: "url"},
-      {Rank: "2",
-      Title: "Hillbilly Elegy: A Memoir of a Family and Culture in Crisis",
-      Author: "Vance",
-      Author_Bio: "url",
-      Price: "$16.70",
-      Format: "Hardcover",
-      Rating: "5/5 Stars",
-      Link: "url"},
-    ]
+    binding.pry
+      get_book_list.css('div.pb-m.mt-m.bd-bottom-disabled-gray.record').collect do |book_listing|
+        {Rank: book_listing.css('div.col-lg-1.count').text.strip,
+        Title: book_listing.css('h3.product-info-title a').text.strip,
+        Author: book_listing.css('div.product-shelf-author.contributors a').text.strip,
+        Author_Bio: book_listing.css('div.product-shelf-author.contributors a').attr('href').value.strip,
+        Price: book_listing.css('a.current.link').text.strip,
+        Format: book_listing.css('a.format').text.strip,
+        Rating: book_listing.css('div.product-shelf-ratings').attr('aria-label').value,
+        Link: book_listing.css('div.product-shelf-image.product-image a').attr('href').value}
+      end
   end
 
   def self.all_books
