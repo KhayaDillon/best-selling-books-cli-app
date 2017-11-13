@@ -9,7 +9,6 @@ class BestSellingBooks::BarnesAndNobleScraper
   end
 
   def self.scrape_book_list
-    binding.pry
       get_book_list.css('div.pb-m.mt-m.bd-bottom-disabled-gray.record').collect do |book_listing|
         {Rank: book_listing.css('div.col-lg-1.count').text.strip,
         Title: book_listing.css('h3.product-info-title a').text.strip,

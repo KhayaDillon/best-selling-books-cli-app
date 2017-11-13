@@ -10,7 +10,7 @@ class BestSellingBooks::AmazonScraper
 
   def self.scrape_book_list
     get_book_list.css('div.zg_itemImmersion').collect do |book_listing|
-      {Rank: book_listing.css('span.zg_rankNumber').text.strip,
+      {Rank: book_listing.css('span.zg_rankNumber').text.strip.chop,
       Title: book_listing.css('div.p13n-sc-truncated-hyphen').text.strip,
       Author: book_listing.css('a.a-size-small.a-link-child').text.strip,
       Author_Bio: book_listing.css('a.a-size-small.a-link-child').attr('href').value.strip,

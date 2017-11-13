@@ -31,10 +31,10 @@ class BestSellingBooks::CLI
     when "exit"
       exit
     when "1"
-      @book = @site.all_books.detect {|instance| instance.rank == "1." }
+      @book = @site.all_books.detect {|instance| instance.rank == "1" }
       choose_info
     when "2"
-      @book = @site.all_books.detect {|instance| instance.rank == "2." }
+      @book = @site.all_books.detect {|instance| instance.rank == "2" }
       choose_info
     when "best sellers"
       call
