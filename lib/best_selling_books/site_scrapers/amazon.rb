@@ -5,15 +5,18 @@ class BestSellingBooks::AmazonScraper
   @@all_books = []
 
   def self.get_book_list
-    binding.pry
     doc = Nokogiri::HTML(open("https://www.amazon.com/gp/bestsellers/2017/books"))
-    doc.css('span.zg_rankNumber').text
-    doc.css('div.p13n-sc-truncated-hyphen').text
-    doc.css('a.a-size-small.a-link-child').text
-    doc.css('span.p13n-sc-price').text
-    doc.css('span.a-size-small.a-color-secondary').text
-    doc.css('i.a-icon-star').text
-    doc.css('').text
+    doc.css('div.zg_itemImmersion').collect do |book_listing|
+      {Rank: book_listing.css('span.zg_rankNumber').text.strip,
+      Title: book_listing.css('div.p13n-sc-truncated-hyphen').text.strip,
+      Author: book_listing.css('a.a-size-small.a-link-child').text.strip,
+      Author_Bio: book_listing.css('a.a-size-small.a-link-child').attr('href').value.strip,
+      Price: book_listing.css('span.p13n-sc-price').text.strip,
+      Format: book_listing.css('span.a-size-small.a-color-secondary').text.strip,
+      Rating: book_listing.css('i.a-icon-star').text.strip,
+      Link: book_listing.css('a.a-link-normal').attr('href').value.strip
+    }
+    end
   end
 
   def self.scrape_book_list
