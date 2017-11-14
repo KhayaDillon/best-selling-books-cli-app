@@ -8,6 +8,10 @@ class BestSellingBooks::Amazon
     @@all_books
   end
 
+  def self.name
+    "Amazon"
+  end
+
   class Scraper
     def self.get_book_list
       Nokogiri::HTML(open("https://www.amazon.com/gp/bestsellers/#{Time.now.year}/books"))

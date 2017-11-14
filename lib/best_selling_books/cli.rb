@@ -1,6 +1,5 @@
 
 class BestSellingBooks::CLI
-  #attr_accessor :site, :book
 
   def call
     choose_best_sellers_list
@@ -27,14 +26,22 @@ class BestSellingBooks::CLI
     end
   end
 
+  def display_other_options
+    puts "> Or type 'List' to return to the list, 'Best Sellers' to pick a different top 20 list, or 'Exit' to leave."
+  end
+
   def choose_listing
-    puts ">> Please type a listing number for more information, or type 'Best Sellers' to go back and pick a different top 20 list, or type 'Exit' to leave."
+    puts ">> Please type a listing number for more information."
+    display_other_options
     input = gets.strip
     if input.downcase == "exit"
       exit
     elsif input.to_i != 0
       @book = @site.all_books.detect {|instance| instance.rank == input }
       choose_info
+    elsif input.downcase == "list"
+      @site.list_best_sellers
+      choose_listing
     elsif input.downcase == "best sellers"
       call
     else
@@ -66,6 +73,9 @@ class BestSellingBooks::CLI
         puts @book.rating
       when "e"
         puts @book.link
+      when "list"
+        @site.list_best_sellers
+        choose_listing
       when "best sellers"
         call
       when "exit"

@@ -8,6 +8,10 @@ class BestSellingBooks::BarnesAndNoble
     @@all_books
   end
 
+  def self.name
+    "B&N"
+  end
+
   class Scraper
     def self.get_book_list
       doc = Nokogiri::HTML(open("https://www.barnesandnoble.com/b/books/_/N-1fZ29Z8q8"))

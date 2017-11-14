@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["'Khaya Ramcharita-Dillon'"]
   spec.email         = ["'yahyal0v3@yahoo.com'"]
 
-  spec.summary       = %q{Best Selling Books Scraper}
+  spec.summary       = %q{Best Selling Books Lister}
   spec.description   = %q{Lists the best selling books from Amazon and B&N and provides information about each book.}
   spec.homepage      = ""
   spec.license       = "MIT"
