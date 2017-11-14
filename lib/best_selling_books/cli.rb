@@ -4,6 +4,7 @@ class BestSellingBooks::CLI
   def call
     choose_best_sellers_list
     choose_listing
+    choose_info
   end
 
   def choose_best_sellers_list
@@ -38,7 +39,6 @@ class BestSellingBooks::CLI
       exit
     elsif input.to_i != 0
       @book = @site.all_books.detect {|instance| instance.rank == input }
-      choose_info
     elsif input.downcase == "list"
       @site.list_best_sellers
       choose_listing
@@ -50,7 +50,7 @@ class BestSellingBooks::CLI
     end
   end
 
-  def choose_info
+  def list_book_info
     puts @book.title
     puts "A. Author Bio"
     puts "B. Price"
@@ -58,7 +58,10 @@ class BestSellingBooks::CLI
     puts "D. Site Rating"
     puts "E. Link"
     puts ">> What would you like to know about this listing? Please select a letter."
+  end
 
+  def choose_info
+    list_book_info
     loop do
       input = gets.strip
       case input.downcase
@@ -76,6 +79,7 @@ class BestSellingBooks::CLI
       when "list"
         @site.list_best_sellers
         choose_listing
+        choose_info
       when "best sellers"
         call
       when "exit"
