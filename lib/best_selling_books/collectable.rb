@@ -3,7 +3,7 @@ require 'pry'
 module BestSellingBooks::Collectable
 
   def create_books
-    scrape_book_list.each do |hash|
+    self::Scraper.scrape_book_list.each do |hash|
       instance = BestSellingBooks::Books.new
       instance.title = hash[:Title]
       instance.author = hash[:Author]

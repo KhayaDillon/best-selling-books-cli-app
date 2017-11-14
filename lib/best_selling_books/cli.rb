@@ -4,32 +4,31 @@ class BestSellingBooks::CLI
 
   def call
     choose_best_sellers_list
-    display_options
+    choose_listing
   end
 
   def choose_best_sellers_list
-    puts "Would you like to see Barnes & Nobles' or Amazon's best sellers of #{Time.now.year}?"
+    puts ">> Would you like to see Barnes & Noble's or Amazon's best sellers of #{Time.now.year}?"
     site = gets.strip
-    if site.downcase == "amazon" || site.downcase == "amazon's"
-      @site = BestSellingBooks::AmazonScraper
+    case site.downcase
+    when "amazon", "amazon's"
+      @site = BestSellingBooks::Amazon
       @site.create_books if @site.all_books == []
       @site.list_best_sellers
-    elsif site.downcase == "barnes & noble" || site.downcase == "barnes & noble's" || site.downcase == "b&n"
-      @site = BestSellingBooks::BarnesAndNobleScraper
+    when "barnes & noble", "barnes & noble's", "barnes and noble", "barnes and noble's", "b&n"
+      @site = BestSellingBooks::BarnesAndNoble
       @site.create_books if @site.all_books == []
       @site.list_best_sellers
+    when "exit"
+      exit
     else
-      puts "Please type the name of the best sellers list you would like to view."
+      puts "Invalid input. Please type the name of the best sellers list you would like to view."
       choose_best_sellers_list
     end
   end
 
-  def display_options
-    puts "Please type a listing number for more information, or type 'Best Sellers' to go back and pick a different top 20 list, or type 'Exit' to leave."
-    choose_option
-  end
-
-  def choose_option
+  def choose_listing
+    puts ">> Please type a listing number for more information, or type 'Best Sellers' to go back and pick a different top 20 list, or type 'Exit' to leave."
     input = gets.strip
     if input.downcase == "exit"
       exit
@@ -40,22 +39,24 @@ class BestSellingBooks::CLI
       call
     else
       puts "Invalid input."
-      display_options
+      choose_listing
     end
   end
 
   def choose_info
-    puts "What would you like to know about this listing?"
+    puts @book.title
     puts "A. Author Bio"
     puts "B. Price"
     puts "C. Available Format"
     puts "D. Site Rating"
     puts "E. Link"
+    puts ">> What would you like to know about this listing? Please select a letter."
 
     loop do
       input = gets.strip
       case input.downcase
       when "a"
+        puts "About " + @book.author
         puts @book.author_bio
       when "b"
         puts @book.price
