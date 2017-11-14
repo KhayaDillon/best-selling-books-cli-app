@@ -2,7 +2,7 @@ require 'pry'
 
 module BestSellingBooks::Collectable
 
-  def create_books
+  def create_and_collect_books
     self::Scraper.scrape_book_list.each do |hash|
       instance = BestSellingBooks::Books.new
       instance.title = hash[:Title]

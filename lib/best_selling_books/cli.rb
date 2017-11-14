@@ -28,7 +28,7 @@ class BestSellingBooks::CLI
   end
 
   def choose_listing
-    @site.create_books if @site.all_books == []
+    @site.create_and_collect_books if @site.all_books == []
     @site.list_best_sellers
     puts ">> Please type a listing number for more information."
     display_other_options
@@ -53,7 +53,7 @@ class BestSellingBooks::CLI
     puts "B. Price"
     puts "C. Available Format"
     puts "D. Site Rating"
-    puts "E. @site.name Link"
+    puts "E. #{@site.name} Link"
     puts ">> What would you like to know about this listing? Please select a letter."
   end
 

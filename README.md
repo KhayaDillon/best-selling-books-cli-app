@@ -1,7 +1,7 @@
 # BestSellingBooks
 
 This Ruby Gem provides a CLI to view the top 20 best selling books of the year according to Amazon's and Barnes & Noble's website.
-The user can also select a book listing to view addition details about the book.
+The user can also select book listings to view additional details about them.
 
 ## Installation
 
