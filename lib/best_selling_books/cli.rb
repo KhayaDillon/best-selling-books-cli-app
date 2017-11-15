@@ -13,8 +13,10 @@ class BestSellingBooks::CLI
     case site.downcase
     when "amazon", "amazon's"
       @site = BestSellingBooks::Amazon
+      create_and_display_book_list
     when "barnes & noble", "barnes & noble's", "barnes and noble", "barnes and noble's", "b&n"
       @site = BestSellingBooks::BarnesAndNoble
+      create_and_display_book_list
     when "exit"
       exit
     else
@@ -23,13 +25,16 @@ class BestSellingBooks::CLI
     end
   end
 
+  def create_and_display_book_list
+    @site.create_and_collect_books if @site.all_books == []
+    @site.list_best_sellers
+  end
+
   def display_other_options
     puts "> Or type 'List' to return to the list, 'Best Sellers' to pick a different top 20 list, or 'Exit' to leave."
   end
 
   def choose_listing
-    @site.create_and_collect_books if @site.all_books == []
-    @site.list_best_sellers
     puts ">> Please type a listing number for more information."
     display_other_options
     input = gets.strip
@@ -38,6 +43,7 @@ class BestSellingBooks::CLI
     elsif input.to_i != 0
       @book = @site.all_books.detect {|instance| instance.rank == input }
     elsif input.downcase == "list"
+      create_and_display_book_list
       choose_listing
     elsif input.downcase == "best sellers"
       call
@@ -47,7 +53,7 @@ class BestSellingBooks::CLI
     end
   end
 
-  def list_book_info
+  def display_book_info_options
     puts @book.title
     puts "A. Author Bio"
     puts "B. Price"
@@ -58,7 +64,7 @@ class BestSellingBooks::CLI
   end
 
   def choose_info
-    list_book_info
+    display_book_info_options
     loop do
       input = gets.strip
       case input.downcase

@@ -20,10 +20,12 @@ class BestSellingBooks::BarnesAndNoble
     def self.scrape_book_list
       homepage = "https://www.barnesandnoble.com"
       get_book_list.css('div.pb-m.mt-m.bd-bottom-disabled-gray.record').collect do |book_listing|
+        author_bio = homepage + book_listing.css('div.product-shelf-author.contributors a').attr('href').value.strip
+
         {Rank: book_listing.css('div.col-lg-1.count').text.strip,
         Title: book_listing.css('h3.product-info-title a').text.strip,
         Author: book_listing.css('div.product-shelf-author.contributors a').text.strip,
-        Author_Bio: homepage + book_listing.css('div.product-shelf-author.contributors a').attr('href').value.strip,
+        Author_Bio: author_bio.gsub!(' ', '%20'),
         Price: book_listing.css('a.current.link').text.strip,
         Format: book_listing.css('a.format').text.strip,
         Rating: book_listing.css('div.product-shelf-ratings').attr('aria-label').value,
