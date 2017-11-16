@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    best_selling_books (0.1.0)
+    best-selling-books-cli-gem (0.1.0)
       nokogiri
 
 GEM
@@ -35,11 +35,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  best_selling_books!
+  best-selling-books-cli-gem!
   bundler (~> 1.15)
   pry
   rake (~> 10.0)
   rspec
 
 BUNDLED WITH
-   1.15.4
+   1.16.0
