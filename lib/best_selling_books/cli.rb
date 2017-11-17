@@ -40,7 +40,7 @@ class BestSellingBooks::CLI
     input = gets.strip
     if input.downcase == "exit"
       exit
-    elsif input.to_i != 0
+    elsif input.to_i > 0 && input.to_i <= 20
       @book = @site.all_books.detect {|instance| instance.rank == input }
     elsif input.downcase == "list"
       create_and_display_book_list
