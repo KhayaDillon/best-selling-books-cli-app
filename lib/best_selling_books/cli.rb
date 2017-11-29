@@ -13,10 +13,10 @@ class BestSellingBooks::CLI
     case site.downcase
     when "amazon", "amazon's"
       @site = BestSellingBooks::Amazon
-      create_and_display_book_list
+      create_and_display_book_list(@site.name)
     when "barnes & noble", "barnes & noble's", "barnes and noble", "barnes and noble's", "b&n"
       @site = BestSellingBooks::BarnesAndNoble
-      create_and_display_book_list
+      create_and_display_book_list(@site.name)
     when "exit"
       exit
     else
@@ -25,9 +25,10 @@ class BestSellingBooks::CLI
     end
   end
 
-  def create_and_display_book_list
-    @site.create_and_collect_books if @site.all_books == []
-    @site.list_best_sellers
+  def create_and_display_book_list(site)
+    BestSellingBooks::Scraper.create_and_collect_books(site) if @site.all_books == []
+    puts @site.name + "'s Top 20"
+    @site.all_books.each {|instance| puts "#{instance.rank}. #{instance.title} by #{instance.author}"}
   end
 
   def display_other_options
@@ -43,7 +44,7 @@ class BestSellingBooks::CLI
     elsif input.to_i > 0 && input.to_i <= 20
       @book = @site.all_books.detect {|instance| instance.rank == input }
     elsif input.downcase == "list"
-      create_and_display_book_list
+      create_and_display_book_list(@site.name)
       choose_listing
     elsif input.downcase == "best sellers"
       call
@@ -80,7 +81,7 @@ class BestSellingBooks::CLI
       when "e"
         puts @book.link
       when "list"
-        @site.list_best_sellers
+        create_and_display_book_list(@site.name)
         choose_listing
         choose_info
       when "best sellers"
